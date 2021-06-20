@@ -38,13 +38,13 @@ function rendar() {
     let img1 = randomNumber(0, imgArray.length - 1)
     Product.allObj[img1].views++;
     let img2 = randomNumber(0, imgArray.length - 1)
-    while (img1 === img2) {
+    while (img1 == img2) {
         img2 = randomNumber(0, imgArray.length - 1)
     }
     Product.allObj[img2].views++;
 
     let img3 = randomNumber(0, imgArray.length - 1)
-    while (img3 === img1 || img3 === img2) {
+    while (img3 == img1 || img3 == img2) {
         img3 = randomNumber(0, imgArray.length - 1)
     }
     Product.allObj[img3].views++;
@@ -60,18 +60,18 @@ function rendar() {
 }
 rendar();
 function clickListener(event) {
-    if ((event.target.id === 'img1' || event.target.id === 'img2' || event.target.id === 'img3') && (click1 < time1))
-        if (event.target.id === 'img1') {
+    if ((event.target.id == 'img1' || event.target.id == 'img2' || event.target.id == 'img3') && (click1 < time1))
+        if (event.target.id == 'img1') {
             Product.allObj[index1].clickNum++;
             rendar();
             click1++;
         }
-    if (event.target.id === 'img2') {
+    if (event.target.id =='img2') {
         Product.allObj[index2].clickNum++;
         rendar();
         click1++
     }
-    if (event.target.id === 'img3') {
+    if (event.target.id == 'img3') {
         Product.allObj[index3].clickNum++;
         rendar();
         click1++;
