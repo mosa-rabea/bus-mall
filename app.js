@@ -10,7 +10,7 @@ listR.appendChild(ul);
 let imgArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg',
     'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png',
     'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
-let click = 0;
+let click1 = 0;
 const time1 = 25;
 let index1 = 0;
 let index2 = 0;
@@ -60,21 +60,21 @@ function rendar() {
 }
 rendar();
 function clickListener(event) {
-    if ((event.target.id === 'img1' || event.target.id === 'img2' || event.target.id === 'img3') && click < time1)
+    if ((event.target.id === 'img1' || event.target.id === 'img2' || event.target.id === 'img3') && (click1 <= time1-1))
         if (event.target.id === 'img1') {
             Product.allObj[index1].clickNum++;
             rendar();
-            click++
+            click1++
         }
     if (event.target.id === 'img2') {
         Product.allObj[index2].clickNum++;
         rendar();
-        click++
+        click1++
     }
     if (event.target.id === 'img3') {
         Product.allObj[index3].clickNum++;
         rendar();
-        click++
+        click1++
     }
 }
 function resultLisener(event) {
