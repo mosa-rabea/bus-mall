@@ -60,7 +60,7 @@ function rendar() {
 }
 rendar();
 function clickListener(event) {
-    if ((event.target.id == 'img1' || event.target.id == 'img2' || event.target.id == 'img3') && (click1 < time1))
+    if ((event.target.id == 'img1' || event.target.id == 'img2' || event.target.id == 'img3') && (click1 < time1)){
         if (event.target.id == 'img1') {
             Product.allObj[index1].clickNum++;
             rendar();
@@ -75,7 +75,7 @@ function clickListener(event) {
         Product.allObj[index3].clickNum++;
         rendar();
         click1++;
-    }
+    }}
 }
 function resultLisener(event) {
     event.preventDefault();
