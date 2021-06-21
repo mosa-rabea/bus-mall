@@ -90,3 +90,8 @@ function resultLisener(event) {
 
 btn.addEventListener('click', resultLisener);
 imgeSec.addEventListener('click', clickListener);
+function chartResult (){
+
+
+    
+}
