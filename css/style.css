@@ -1,0 +1,9 @@
+body{ background-color: rgb(230, 229, 177);}
+#imgSec{
+    display: grid;grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+#imgSec img {
+    height: 250px;
+    object-fit: cover;
+}

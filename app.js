@@ -35,15 +35,24 @@ for (let i = 0; i < imgArray.length; i++) {
 
 }
 function rendar() {
-    let img1 = randomNumber(0, imgArray.length - 1)
+    let img1 = randomNumber(0, imgArray.length - 1);
+    if (img1==index1){
+        img1=randomNumber(0, imgArray.length - 1)
+    }
     Product.allObj[img1].views++;
-    let img2 = randomNumber(0, imgArray.length - 1)
+
+    let img2 = randomNumber(0, imgArray.length - 1);
+    if(img2==index2){
+        img2 = randomNumber(0, imgArray.length - 1)
+    }
     while (img1 == img2) {
         img2 = randomNumber(0, imgArray.length - 1)
     }
     Product.allObj[img2].views++;
 
-    let img3 = randomNumber(0, imgArray.length - 1)
+    let img3 = randomNumber(0, imgArray.length - 1);
+    if(img3==index3){
+        img3 = randomNumber(0, imgArray.length - 1)}
     while (img3 == img1 || img3 == img2) {
         img3 = randomNumber(0, imgArray.length - 1)
     }
@@ -75,7 +84,10 @@ function clickListener(event) {
         Product.allObj[index3].clickNum++;
         rendar();
         click1++;
-    }}
+    }}else if(click1==time1){
+        chartResult();
+    }
+
 }
 function resultLisener(event) {
     event.preventDefault();
@@ -86,6 +98,7 @@ function resultLisener(event) {
 
     }
     btn.removeEventListener('click', resultLisener);
+
 }
 
 btn.addEventListener('click', resultLisener);
@@ -94,4 +107,57 @@ function chartResult (){
 
 
     
+}
+function chartResult( ){
+    let item =[];
+    let watch=[];
+    let clk =[];
+    for (let index = 0; index <  Product.allObj.length; index++) {
+item.push(Product.allObj[index].name);
+    watch.push(Product.allObj[index].views);  
+    clk.push(Product.allObj[index].clickNum);    
+        
+    }
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels:item,
+            datasets: [{
+                label: '# of Votes',
+                data: watch,
+                backgroundColor: 
+                    'blue'
+                   
+                ,
+                borderColor:
+                    'rgba(255, 99, 132, 1)'
+                  
+                ,
+                borderWidth: 1
+            },{
+                label: '# of click',
+                data: clk,
+                backgroundColor: 
+                    'rgba(255, 99, 132, 0.2)'
+                   
+                ,
+                borderColor:
+                    'rgba(255, 99, 132, 1)'
+                  
+                ,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+
 }
