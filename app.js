@@ -21,42 +21,38 @@ function randomNumber(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
-function Product(name, path) {
+function Product(name, path,click,veiws) {
     this.name = name;
     this.path = `./img/${path}`;
-    this.clickNum = 0;
-    this.views = 0;
+    this.clickNum = click;
+    this.veiws = veiws;
     Product.allObj.push(this);
 
 }
-for (let i = 0; i < imgArray.length; i++) {
-    let name = imgArray[i].split('.')[0];
-    new Product(name, imgArray[i])
 
-}
 function rendar() {
     let img1 = randomNumber(0, imgArray.length - 1);
     if (img1==index1){
         img1=randomNumber(0, imgArray.length - 1)
     }
-    Product.allObj[img1].views++;
+    Product.allObj[img1].veiws++;
 
     let img2 = randomNumber(0, imgArray.length - 1);
-    if(img2==index2){
+    if(img2==index2 || img1==index1){
         img2 = randomNumber(0, imgArray.length - 1)
     }
     while (img1 == img2) {
         img2 = randomNumber(0, imgArray.length - 1)
     }
-    Product.allObj[img2].views++;
+    Product.allObj[img2].veiws++;
 
     let img3 = randomNumber(0, imgArray.length - 1);
-    if(img3==index3){
+    if(img3==index3 || img2==index2 || img1==index1){
         img3 = randomNumber(0, imgArray.length - 1)}
     while (img3 == img1 || img3 == img2) {
         img3 = randomNumber(0, imgArray.length - 1)
     }
-    Product.allObj[img3].views++;
+    Product.allObj[img3].veiws++;
 
 
 
@@ -67,7 +63,7 @@ function rendar() {
     index2 = img2;
     index3 = img3;
 }
-rendar();
+
 function clickListener(event) {
     if ((event.target.id == 'img1' || event.target.id == 'img2' || event.target.id == 'img3') && click1 < time1){
         if (event.target.id == 'img1') {
@@ -93,28 +89,24 @@ function resultLisener(event) {
     event.preventDefault();
     for (let index = 0; index < Product.allObj.length; index++) {
         let li = document.createElement('li');
-        li.textContent = `${Product.allObj[index].name} has ${Product.allObj[index].clickNum} votes ,and was seen ${Product.allObj[index].views} `;
+        li.textContent = `${Product.allObj[index].name} has ${Product.allObj[index].clickNum} votes ,and was seen ${Product.allObj[index].veiws} `;
         ul.appendChild(li);
 
     }
     btn.removeEventListener('click', resultLisener);
-
+localStorage.setItem('items',JSON.stringify( Product.allObj));
 }
 
 btn.addEventListener('click', resultLisener);
 imgeSec.addEventListener('click', clickListener);
-function chartResult (){
 
-
-    
-}
 function chartResult( ){
     let item =[];
     let watch=[];
     let clk =[];
     for (let index = 0; index <  Product.allObj.length; index++) {
 item.push(Product.allObj[index].name);
-    watch.push(Product.allObj[index].views);  
+    watch.push(Product.allObj[index].veiws);  
     clk.push(Product.allObj[index].clickNum);    
         
     }
@@ -161,4 +153,27 @@ item.push(Product.allObj[index].name);
 
 
 }
+ function getData(){
+     let data =JSON.parse(localStorage.getItem('items'));
+     if(data){
+         for (let i = 0; i < data.length; i++) {
+            new Product(data[i].name,((data[i].path).replace('./img/','')),data[i].clickNum,data[i].veiws);
+             
+         }
+         rendar();
+        
+     }else{for (let j = 0; j< imgArray.length; j++) {
+         let itemName=imgArray[j].split('.')[0];
+         new Product(itemName,imgArray[j],0,0);
+         
+     }rendar();
+
+     }
+     
+
+
+
+
+
+ } getData();
 //mosa
